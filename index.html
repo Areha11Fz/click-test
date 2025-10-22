@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Background Color</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #3498db;
+            /* Initial background color (blue) */
+            transition: background-color 0s;
+            /* Instant transition for color change */
+            cursor: pointer;
+            /* Indicate clickable area */
+        }
+
+        h1 {
+            font-family: sans-serif;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>Click anywhere to change the background color!</h1> -->
+
+    <script>
+        const colors = [
+            '#e74c3c', // Red
+            '#2ecc71', // Green
+            '#f1c40f', // Yellow
+            '#9b59b6', // Purple
+            '#1abc9c', // Turquoise
+            '#e67e22', // Orange
+            '#34495e'  // Dark Blue
+        ];
+
+        document.body.addEventListener('click', () => {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        });
+    </script>
+</body>
+
+</html>
