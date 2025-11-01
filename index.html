@@ -1,54 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Background Color</title>
+    <title>Tap Counter</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #3498db;
-            /* Initial background color (blue) */
-            transition: background-color 0s;
-            /* Instant transition for color change */
-            cursor: pointer;
-            /* Indicate clickable area */
+            min-height: 100vh;
         }
-
-        h1 {
-            font-family: sans-serif;
-            color: white;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        #tap-area {
+            height: 50vh;
+            width: 50vw;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        #counter {
+            font-size: 5rem;
+            color: #333;
+            pointer-events: none;
+            user-select: none;
         }
     </style>
 </head>
-
 <body>
-    <!-- <h1>Click anywhere to change the background color!</h1> -->
+    <div id="tap-area">
+        <span id="counter">0</span>
+    </div>
 
     <script>
-        const colors = [
-            '#e74c3c', // Red
-            '#2ecc71', // Green
-            '#f1c40f', // Yellow
-            '#9b59b6', // Purple
-            '#1abc9c', // Turquoise
-            '#e67e22', // Orange
-            '#34495e'  // Dark Blue
-        ];
+        const tapArea = document.getElementById('tap-area');
+        const counter = document.getElementById('counter');
+        let count = 0;
 
-        document.body.addEventListener('click', () => {
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            document.body.style.backgroundColor = randomColor;
+        tapArea.addEventListener('click', () => {
+            count++;
+            counter.textContent = count;
         });
     </script>
 </body>
-
 </html>
