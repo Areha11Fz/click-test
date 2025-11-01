@@ -43,6 +43,12 @@
             color: #FFFFFF;
             user-select: none;
         }
+        #tps {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
@@ -51,14 +57,17 @@
             <span id="counter">0</span>
         </div>
         <div id="time-diff"></div>
+        <div id="tps"></div>
     </div>
 
     <script>
         const tapArea = document.getElementById('tap-area');
         const counter = document.getElementById('counter');
         const timeDiff = document.getElementById('time-diff');
+        const tps = document.getElementById('tps');
         let count = 0;
         let lastTapTime = null;
+        const tapTimestamps = [];
 
         tapArea.addEventListener('click', () => {
             const currentTime = new Date().getTime();
@@ -67,6 +76,14 @@
                 timeDiff.textContent = `${diff} ms`;
             }
             lastTapTime = currentTime;
+
+            // TPS calculation
+            tapTimestamps.push(currentTime);
+            const oneSecondAgo = currentTime - 1000;
+            while (tapTimestamps.length > 0 && tapTimestamps[0] < oneSecondAgo) {
+                tapTimestamps.shift();
+            }
+            tps.textContent = `${tapTimestamps.length} TPS`;
 
             count++;
             counter.textContent = count;
