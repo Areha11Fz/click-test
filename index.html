@@ -8,20 +8,16 @@
         body {
             margin: 0;
             font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             background-color: #121212;
-        }
-        #main-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center children horizontally */
+            text-align: center; /* Center inline/inline-block elements */
         }
         #tap-area {
-            height: 50vh;
-            width: 50vw;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 80vh;
+            width: 80vw;
             background-color: #1E1E1E;
             display: flex;
             justify-content: center;
@@ -37,25 +33,25 @@
             pointer-events: none;
             user-select: none;
         }
-        #time-diff {
-            margin-top: 10px; /* Space between tap-area and time-diff */
-            font-size: 1.2rem;
+        #tap-info {
+            position: absolute;
+            top: calc(50% + 40vh + 20px); /* 50% (center) + 40vh (half of tap-area height) + 20px (margin) */
+            left: 50%;
+            transform: translateX(-50%);
             color: #FFFFFF;
+            font-size: 1.2rem;
             user-select: none;
         }
         #tps {
             margin-top: 10px;
-            font-size: 1.2rem;
-            color: #FFFFFF;
-            user-select: none;
         }
     </style>
 </head>
 <body>
-    <div id="main-container">
-        <div id="tap-area">
-            <span id="counter">0</span>
-        </div>
+    <div id="tap-area">
+        <span id="counter">0</span>
+    </div>
+    <div id="tap-info">
         <div id="time-diff"></div>
         <div id="tps"></div>
     </div>
@@ -90,7 +86,7 @@
             tapArea.classList.add('tapped');
             setTimeout(() => {
                 tapArea.classList.remove('tapped');
-            }, 50); // Flash for 50ms
+            }, 1); // Flash for 1ms
         });
     </script>
 </body>
