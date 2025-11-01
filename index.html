@@ -14,6 +14,11 @@
             min-height: 100vh;
             background-color: #121212;
         }
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center children horizontally */
+        }
         #tap-area {
             height: 50vh;
             width: 50vw;
@@ -32,19 +37,37 @@
             pointer-events: none;
             user-select: none;
         }
+        #time-diff {
+            margin-top: 10px; /* Space between tap-area and time-diff */
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
-    <div id="tap-area">
-        <span id="counter">0</span>
+    <div id="main-container">
+        <div id="tap-area">
+            <span id="counter">0</span>
+        </div>
+        <div id="time-diff"></div>
     </div>
 
     <script>
         const tapArea = document.getElementById('tap-area');
         const counter = document.getElementById('counter');
+        const timeDiff = document.getElementById('time-diff');
         let count = 0;
+        let lastTapTime = null;
 
         tapArea.addEventListener('click', () => {
+            const currentTime = new Date().getTime();
+            if (lastTapTime) {
+                const diff = currentTime - lastTapTime;
+                timeDiff.textContent = `${diff} ms`;
+            }
+            lastTapTime = currentTime;
+
             count++;
             counter.textContent = count;
             tapArea.classList.add('tapped');
