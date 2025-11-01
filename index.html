@@ -12,19 +12,23 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background-color: #121212;
         }
         #tap-area {
             height: 50vh;
             width: 50vw;
-            background-color: #f0f0f0;
+            background-color: #1E1E1E;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
         }
+        #tap-area.tapped {
+            background-color: #333333;
+        }
         #counter {
             font-size: 5rem;
-            color: #333;
+            color: #FFFFFF;
             pointer-events: none;
             user-select: none;
         }
@@ -43,6 +47,10 @@
         tapArea.addEventListener('click', () => {
             count++;
             counter.textContent = count;
+            tapArea.classList.add('tapped');
+            setTimeout(() => {
+                tapArea.classList.remove('tapped');
+            }, 50); // Flash for 50ms
         });
     </script>
 </body>
