@@ -49,10 +49,41 @@
         #tps {
             margin-top: 10px;
         }
+
+        #small-boxes-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+        }
+
+        .small-box {
+            width: 10%;
+            padding-top: 10%; /* Creates square aspect ratio */
+            background-color: #1E1E1E;
+            border: 1px solid #121212;
+        }
+
+        .small-box.tapped {
+            background-color: #333333;
+        }
     </style>
 </head>
 <body>
     <div id="tap-area">
+        <div id="small-boxes-container">
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+            <div class="small-box"></div>
+        </div>
         <span id="counter">0</span>
     </div>
     <div id="tap-info">
@@ -65,9 +96,11 @@
         const counter = document.getElementById('counter');
         const timeDiff = document.getElementById('time-diff');
         const tps = document.getElementById('tps');
+        const smallBoxes = document.querySelectorAll('.small-box');
         let count = 0;
         let lastTapTime = null;
         const tapTimestamps = [];
+        let currentBoxIndex = 0;
 
         window.addEventListener('click', () => {
             const currentTime = new Date().getTime();
@@ -87,6 +120,17 @@
 
             count++;
             counter.textContent = count;
+
+            // Animate the small boxes
+            const currentBox = smallBoxes[currentBoxIndex];
+            currentBox.classList.add('tapped');
+            setTimeout(() => {
+                currentBox.classList.remove('tapped');
+            }, 100); // Flash for 100ms
+
+            currentBoxIndex = (currentBoxIndex + 1) % 10;
+
+            // Animate the main tap area as well
             tapArea.classList.add('tapped');
             setTimeout(() => {
                 tapArea.classList.remove('tapped');
